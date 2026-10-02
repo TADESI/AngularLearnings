@@ -1,4 +1,4 @@
-import { Component, effect, signal, computed } from '@angular/core';
+import { Component, effect, signal, computed, WritableSignal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Profile } from './profile/profile';
 
@@ -96,20 +96,47 @@ export class App {
   // }
 
   // computed signal syntax
-   height=signal(100);
-   width=signal(20);
-   area=computed(()=>this.height()*this.width());
-   constructor(){
-     effect(()=>{
-       console.log("area is",this.area())
-     })
-   }
-   handleHeight(){
-     this.height.set(this.height()+10);
-   }
-  //
+  //  height=signal(100);
+  //  width=signal(20);
+  //  area=computed(()=>this.height()*this.width());
+  //  constructor(){
+  //    effect(()=>{
+  //      console.log("area is",this.area())
+  //    })
+  //  }
+  //  handleHeight(){
+  //    this.height.set(this.height()+10);
+  //  }
+
   // speed=signal(0)
-  // increaseSpeed(){
-  //   this.speed.set(this.speed+10)
+  // color="black"
+  // fruit=signal("apple");
+  // constructor(){
+  //   effect(()=>{
+  //     if(this.speed()>0 && this.speed()<80){
+  //       this.color='green'
+  //     }
+  //     if(this.speed()>80 && this.speed()<120){
+  //       this.color='yellow'
+  //     }
+  //     if (this.speed() >= 120) {
+  //       this.color = 'red';
+  //     }
+  //     console.log("speed:",this.speed())
+  //   })
   // }
+  // increaseSpeed(){
+  //   this.speed.set(this.speed()+10);
+  // }
+  // changeFruit(){
+  //   this.fruit.set('banana')
+  // }
+  data:WritableSignal<number | boolean | string>=signal<number | boolean |string>("sid")
+  users:WritableSignal<string[]>=signal(["sid","kun","praj"])
+  speed=computed<number>(()=>90)
+  handleData(){
+    this.data.set(true)
+    this.users.update((item)=>[...item,"lee"])
+    console.log(this.users())
+  }
 }
