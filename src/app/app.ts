@@ -1,9 +1,11 @@
 import { Component, effect, signal, computed, WritableSignal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Profile } from './profile/profile';
+import { FormsModule } from '@angular/forms';
+import {Child} from './child/child';
+
 
 @Component({
-  imports: [RouterOutlet,Profile],
+  imports: [RouterOutlet, FormsModule, Child],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
@@ -131,12 +133,97 @@ export class App {
   // changeFruit(){
   //   this.fruit.set('banana')
   // }
-  data:WritableSignal<number | boolean | string>=signal<number | boolean |string>("sid")
-  users:WritableSignal<string[]>=signal(["sid","kun","praj"])
-  speed=computed<number>(()=>90)
-  handleData(){
-    this.data.set(true)
-    this.users.update((item)=>[...item,"lee"])
-    console.log(this.users())
+
+  //   data:WritableSignal<number | boolean | string>=signal<number | boolean |string>("sid")
+  //   users:WritableSignal<string[]>=signal(["sid","kun","praj"])
+  //   speed=computed<number>(()=>90)
+  //   handleData(){
+  //     this.data.set(true)
+  //     this.users.update((item)=>[...item,"lee"])
+  //     console.log(this.users())
+  //   }
+
+  //   counter:WritableSignal<number>=signal<number>(0);
+  //
+  //   increment(){
+  //     this.counter.update((val)=>val+1);
+  //   }
+  //   decrement(){
+  //     if(this.counter()>0){
+  //       this.counter.update((val)=>val-1);
+  //     }
+  //   }
+  //   reset(){
+  //     this.counter.set(0)
+  //   }
+
+  // name:WritableSignal<string>=signal(' ');
+  // resetValue(){
+  //   this.name.set('sid tade')
+  // }
+  // setValue(val:string){
+  //   this.name.set(val)
+  // }
+
+  // isLogin=signal(false);
+  // show=signal(true);
+  // status=signal("progress")
+  // handleLogin(status:boolean){
+  //   this.isLogin.set(status);
+  // }
+  // handleStatus(event:Event){
+  //   let target = event.target as HTMLSelectElement;
+  //   this.status.set(target.value);
+  // }
+
+  // users=signal(["Uday","Sia","Petro","Rahul"])
+  // userDetails=signal(
+  //   [{id:1,name:"Uday",surname:"Bandu",email:"uday@test.com"},
+  //   {id:2,name:"Sia",surname:"Goel",email:"sia@test.com"},
+  //   {id:3,name:"Petro",surname:"Clarence",email:"petro@test.com"},
+  //   {id:4,name:"Rahul",surname:"Jadhav",email:"rahul@test.com"}])
+
+  // status=signal('notStarted');
+  // handleSwitch(event:Event){
+  //   const target = event.target as HTMLSelectElement;
+  //   this.status.set(target.value);
+  // }
+
+  // name=signal('siddhant')
+  // age=20
+  // userData=signal({
+  //   name:'sid tade',
+  //   age:25,
+  //   email:'sid@test.com'
+  // })
+  // updateUserData(key:string,val:string){
+  // if(key==='name'){
+  //   this.userData.update((item)=>({...item,name:val}))
+  // }
+  // if(key==='age'){
+  //   this.userData.update((item) => ({ ...item, age: parseInt(val) }));
+  // }
+  // if (key === 'email') {
+  //   this.userData.update((item) => ({ ...item, email: val }));
+  // }
+  //for all this
+  // this.userData.update(item => ({ ...item, [key]: val }))
+  //}
+
+  // userName=signal("siddhant tade")
+  users=signal(['sid','kun','sum','praj'])
+  newUser=signal(" ")
+  selectUserName=signal(" ")
+  addNewUser(){
+    this.users.update((data)=>([...data,this.newUser()]))
   }
+  selectedUser(name:string){
+    console.log(name)
+    this.selectUserName.set(name)
+  }
+  deleteUser(name:string){
+    this.users.update((data)=>data.filter((item)=>item!=name))
+  }
+
+
 }

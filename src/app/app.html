@@ -62,8 +62,135 @@
 <!--<h2>{{fruit()}}</h2>-->
 <!--<button (click)="changeFruit()"></button>-->
 
-<h1>Signal Data Type</h1>
-<button (click)="handleData()">update users</button>
+<!--<h1>Signal Data Type</h1>-->
+<!--<button (click)="handleData()">update users</button>-->
+
+<!--<div>-->
+<!--  <h1>Counter App</h1>-->
+<!--  <div>-->
+<!--    {{counter()}}-->
+<!--  </div>-->
+<!--  <div>-->
+<!--    <button (click)="decrement()">-</button>-->
+<!--    <button (click)="reset()">Reset</button>-->
+<!--    <button (click)="increment()">+</button>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--<p>Value:{{name()}}</p>-->
+<!--<input type="text" [value]="name()" (input)="setValue($event.target.value)">-->
+<!--<button (click)="resetValue()"> Reset Value </button>-->
+
+<!--<h1>Control flow Statement</h1>-->
+<!--<div>-->
+<!--  @if (isLogin()) {-->
+<!--    <span>welcome</span>-->
+<!--    <button (click)="handleLogin(false)">Logout</button>-->
+<!--  } @else {-->
+<!--    <span>please login</span>-->
+<!--    <button (click)="handleLogin(true)">Login</button>-->
+<!--  }-->
+<!--</div>-->
+<!--<hr/>-->
+<!--<h1>Toggle</h1>-->
+<!--@if (show()) {-->
+<!--  <button (click)="show.set(false)">hide</button>-->
+<!--} @else {-->
+<!--  <button (click)="show.set(true)">show</button>-->
+<!--}-->
+<!--<hr/>-->
+<!--<h1>Check Status</h1>-->
+<!--<select (change)="handleStatus($event)" name="" id="">-->
+<!--  <option value="not started">not started</option>-->
+<!--  <option value="progress">in prog</option>-->
+<!--  <option value="success">success</option>-->
+<!--  <option value="error">error</option>-->
+<!--</select>-->
+<!--<br>-->
+<!--@if(status()=="not started") {-->
+<!--  <span>no status</span>-->
+<!--} @else if(status()=="progress"){-->
+<!--  <span style="color: orange">In prog</span>-->
+<!--} @else if (status()=="success"){-->
+<!--  <span style="color: green">success</span>-->
+<!--} @else if (status()=="error"){-->
+<!--  <span style="color: red">error</span>-->
+<!--}-->
+
+<!--<h1>for | Control flow statement</h1>-->
+<!--<div>-->
+<!--  <ul>-->
+<!--  @for (user of users(); track users){-->
+<!--      <li>-->
+<!--        {{user}}-->
+<!--      </li>-->
+<!--  }-->
+<!--  </ul>-->
+<!--  <hr/>-->
+<!--  <UL>-->
+<!--      @for (user of userDetails();track user.id){-->
+<!--        <li [style.background-color]="$odd?'#ccc':'#ddd'"><span>{{$index+1}}{{user.name+" "+user.surname}}-->
+<!--          @if ($first) {<span style="color: red">Admin</span>}-->
+<!--          @if ($last) {<span style="color: orange">Guest</span>}-->
+<!--        </span>-->
+<!--          <span>-->
+<!--          @if ($count==$index+1){<span><b>Total users</b>{{$count}}</span>}-->
+<!--        </span></li>-->
+<!--      }-->
+<!--  </UL>-->
+<!--</div>-->
+
+<!--<h1>Switch|Control flow Statement</h1>-->
+<!--<select (change)="handleSwitch($event)" name="" id="">-->
+<!--  <option value="notStarted">not started</option>-->
+<!--  <option value="loading">in prog</option>-->
+<!--  <option value="success">success</option>-->
+<!--  <option value="error">error</option>-->
+<!--</select>-->
+
+<!--@switch (status()){-->
+<!--  @case ('notStarted'){-->
+<!--    <span>No update yet</span>-->
+<!--  }-->
+<!--  @case ('loading'){-->
+<!--    <span>in prog</span>-->
+<!--  }-->
+<!--  @case ('success'){-->
+<!--    <span>success</span>-->
+<!--  }-->
+<!--  @default{-->
+<!--    <span>error</span>-->
+<!--  }-->
+<!--}-->
+
+<!--<h1>Two way Data Binding</h1>-->
+<!--<h1>{{name()}}</h1>-->
+<!--<input type="text" [value]="name()" (input)="name.set($event.target.value)">-->
+<!--<hr>-->
+<!--<h1>{{age}}</h1>-->
+<!--<input type="text" [(ngModel)]="age">-->
+<!--<input type="text" [ngModel]="age" (ngModelChange)="age=$event">-->
+<!--<h1>Object updation</h1>-->
+<!--<h1>{{userData().name}}</h1>-->
+<!--<input type="text" [value]="userData().name" (input)="updateUserData('name',$event.target.value)">-->
+<!--<hr/>-->
+<!--<h1>{{userData().age}}</h1>-->
+<!--<input type="text" [value]="userData().age" (input)="updateUserData('age',$event.target.value)">-->
+<!--<hr/>-->
+<!--<h1>{{userData().email}}</h1>-->
+<!--<input type="text" [value]="userData().email" (input)="updateUserData('email',$event.target.value)">-->
+
+<h1>Passing Data</h1>
+<h3>Selected User{{selectUserName()}}</h3>
+<br>
+<input type="text" (input)="newUser.set($event.target.value)" placeholder="enter new user name">
+<button (click)="addNewUser()">Add new user</button>
+@for (user of users(); track user) {
+  <app-child
+  [userName]="user"
+  (selectedUser)="selectedUser($event)"
+  (deleteUser)="deleteUser($event)"></app-child>
+}
 
 
 
